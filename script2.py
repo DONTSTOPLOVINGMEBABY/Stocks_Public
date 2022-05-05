@@ -1,22 +1,21 @@
 import pandas as pd
-import matplotlib.pyplot as plt 
 from alpha_vantage.timeseries import TimeSeries
 
 
 
 ## initializers 
 
-# api_key = "Enter YOUR API KEY HERE"
-# *** For Example, Something Like: *** 
 # api_key = "ZZZZZZZZZZZZZZZZ" 
-            
+
+api_key = "GH5RZKE5CLNDYG61"
+          
 ts = TimeSeries(api_key, output_format = 'pandas')
 
-file1 = open("nasdaq_screener.csv")   ### Name of Stock Symbols you want Pulled  
+file1 = open("constituents_csv.csv")   ### Name of Stock Symbols you want Pulled  
 
 lines = file1.readlines()
 
-lines.remove(lines[0])  ## Strip Header
+lines.remove(lines[0])  ## Takes away the first row of of the first column, in case there is a column title
 
 
 calls = 0 
@@ -34,11 +33,21 @@ def get_stocks(list1):
     while x!= y:
 
         try:
-
-            q = list1[x].split(" \n")
+            ## This may have to be changed depending on how the string needs to be split.
+            ## A good way to check is to print(lines) and see how the string is arranged
+            ## You might have to try list1[x].split("\n") or list1[x].split(" \n") 
+            q = list1[x].split("\n")  
             data, meta = ts.get_monthly('{}'.format(q[0]))
             data.iloc[::-1].to_csv("{}.csv".format(q[0]))
     
+            ''' Other Data Calls:
+
+             data, meta = ts.get_intraday(i, interval='1min', outputsize = 'full')
+             data, meta = ts.get_intraday(i, interval ='15min', outputsize = 'full') 
+             data, meta = ts.get_intraday(i, interval ='30min', outputsize = 'full') 
+             data, meta = ts.get_intraday(i, interval = '60min', outputsize = 'full') 
+             data.iloc[::-1].to_csv("{}_{}.csv".format(i,"Daily"))
+             data.iloc[::-1].to_csv("{}_{}.csv".format(i,"Monthly")) ''' 
 
         except ValueError:
             repo.append(q[0])
@@ -70,7 +79,7 @@ while(len(call2) != 0 ):
   
     if (bugFix == 10):
         break
-    print(bugFix)
+    print(bugFix)   
     bugFix += 1 
 
 
