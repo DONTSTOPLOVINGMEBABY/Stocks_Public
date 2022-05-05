@@ -38,7 +38,7 @@ def get_stocks(list1):
             data, meta = ts.get_monthly('{}'.format(q[0]))
             data.iloc[::-1].to_csv("{}.csv".format(q[0]))
     
-            ''' Other Data Calls:
+            ''' Some Other Data Calls:
 
              data, meta = ts.get_intraday(i, interval='1min', outputsize = 'full')
              data, meta = ts.get_intraday(i, interval ='15min', outputsize = 'full') 
