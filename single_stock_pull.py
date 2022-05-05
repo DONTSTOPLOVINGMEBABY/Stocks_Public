@@ -6,11 +6,11 @@ from alpha_vantage.timeseries import TimeSeries
 
 ## initializers 
 
-api_key = "GH5RZKE5CLNDYG61"
+#api_key = "ZZZZZZZZZZZZZZZZ"
 
 ts = TimeSeries(api_key, output_format = 'pandas')
 
-stock_symbol = 'S&P500'
+stock_symbol = 'AAPL'   ## Change to Desired Symbol 
 
 
 def get_intra():
@@ -27,6 +27,8 @@ def get_monthly():
         data, meta = ts.get_monthly(stock_symbol)  ## Change for Intra, Weekly, etc. 
         data.iloc[::-1].to_csv("{}_monthly.csv".format(stock_symbol))
 
+
+## Select Which Functions you want ## 
 
 get_intra()
 get_daily()
