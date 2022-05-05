@@ -6,8 +6,6 @@ from alpha_vantage.timeseries import TimeSeries
 ## initializers 
 
 # api_key = "ZZZZZZZZZZZZZZZZ" 
-
-api_key = "GH5RZKE5CLNDYG61"
           
 ts = TimeSeries(api_key, output_format = 'pandas')
 
